@@ -666,6 +666,20 @@ abstract class AbstractDatabase extends BaseDatabase {
     }
 
     /**
+     * Create a JSONQuery query.
+     *
+     * @param query a valid JSON query
+     * @return the Query object
+     */
+    @NonNull
+    public Query createJSONQuery(@NonNull String query) {
+        synchronized (getDbLock()) {
+            mustBeOpen();
+            return new JsonQuery(this, query);
+        }
+    }
+
+    /**
      * Get a list of the names of database indicies.
      *
      * @return the list of index names
